@@ -4,12 +4,12 @@ $(document).ready(function() {
     // map programm
     var map, marker, infoWindow;
 
-    function InitializeMap(lat, lan, address) {
+    function InitializeMap(lat, lan, type, address) {
         var location = new google.maps.LatLng(lat, lan);
         var options = {
-            zoom: 15,
+            zoom: 10,
             center: location,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeId: type, // google.maps.MapTypeId.ROADMAP
             disableDefaultUI: true
         };
 
@@ -34,16 +34,18 @@ $(document).ready(function() {
     $('.map-nav').on('click', 'a', function() {
         var lat = $(this).data('lat'),
             lan = $(this).data('lan'),
+            typ = $('.map-content').data('type'),
             adr = $(this).data('address');
 
-        InitializeMap(lat, lan, adr);
+        InitializeMap(lat, lan, typ, adr);
     });
 
     // set default parameters
     var defaultLat = $('.map-content').data('lat'),
         defaultLan = $('.map-content').data('lan'),
+        defaultTyp = $('.map-content').data('type'),
         defaultAdr = $('.map-content').data('address');
 
-    window.onload = InitializeMap(defaultLat, defaultLan, defaultAdr);
+    window.onload = InitializeMap(defaultLat, defaultLan, defaultTyp, defaultAdr);
 
 });
